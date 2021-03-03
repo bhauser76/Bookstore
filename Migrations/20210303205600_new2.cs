@@ -2,7 +2,7 @@
 
 namespace Bookstore.Migrations
 {
-    public partial class Initial : Migration
+    public partial class new2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,8 @@ namespace Bookstore.Migrations
                     BookPublisher = table.Column<string>(nullable: false),
                     BookISBN = table.Column<string>(nullable: false),
                     BookCategory = table.Column<string>(nullable: false),
-                    BookPrice = table.Column<double>(nullable: false)
+                    BookPrice = table.Column<double>(nullable: false),
+                    BookPages = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

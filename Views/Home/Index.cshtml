@@ -2,43 +2,50 @@
     ViewData["Title"] = "Welcome";
 }
 
-@model IQueryable<Book>
+@model BookstoreListViewModel
 
 <div class="text-center">
     <!--page title-->
     <h1 class="display-4">Bookstore Database</h1>
-<div>
-    <!--Table to hold the database-->
-    <table class="table table-bordered table-condensed table-striped table-hover sortable">
-        <thead>
-            <tr><th>Title</th><th>Author</th><th>Publisher</th><th>ISBN</th><th>Category</th><th>Price</th></tr>
-        </thead>
-        <tbody>
-            @foreach (var x in Model)
-            {
-            <tr class="border-danger">
-                <td>
-                    @x.BookTitle
-                </td>
-                <td>
-                    @x.BookAuthor
-                </td>
-                <td>
-                    @x.BookPublisher
-                </td>
-                <td>
-                    @x.BookISBN
-                </td>
-                <td>
-                    @x.BookCategory
-                </td>
-                <td>
-                    $@x.BookPrice
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>
+
     
-</div>
+    <!--Each time a book is added, its card is displayed on the page. 5 Books per page-->
+    <div class="row">
+        @foreach (var x in Model.Books)
+        {
+            <partial name="BookSummary" model="x"/>
+        }
+    </div>
+      
+
+
+            <div id="pages" page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" 
+                 page-class="btn"
+                 page-class-normal="btn-outline-dark"
+                 page-class-selected="btn-primary"
+                 class="btn-group pull-right m-1"></div>
+
+        </div>
+<!--
+<script>
+
+
+    //This script bolds the current page number when selected
+    //Finds the current url and based on the page number in the URL, replaces the innerHTML of the pages Div tag with a bolded number
+    var str = window.location.href;
+    var res = "";
+    if (str.substring(str.length - 1, str.length) == "/") {
+        res = 1;
+    }
+    else { res = str.substring(str.length - 1, str.length); }
+
+    var resBrack = ">" + res + "<";
+
+    var innerHtml = document.getElementById("pages").innerHTML;
+        
+    innerHtml = innerHtml.replace(resBrack, '><b>' + res + '</b><');
+
+    document.getElementById("pages").innerHTML = innerHtml;
+
+</script>
+-->

@@ -25,5 +25,8 @@ namespace Bookstore.Models
         //verification for ISBN13 book number
         [Required, RegularExpression(@"^\d{3}-\d{10}$")]
         public double BookPrice { get; set; }
+        
+        [Required]
+        public int BookPages { get; set; }
     }
 }
