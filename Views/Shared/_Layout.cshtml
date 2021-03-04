@@ -30,9 +30,21 @@
         </nav>
         
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row m-1 p-1">
+                <div class="col-4">
+                    <h1 class="display-4">Bookstore Database</h1>
+                    <vc:navigation-menu />
+                </div>
+                
+            
+                <div class="col-8">
+                    @RenderBody()
+                </div>
+            </div>
+            
         </main>
     </div>
 

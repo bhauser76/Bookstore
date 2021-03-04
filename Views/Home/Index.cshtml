@@ -6,7 +6,7 @@
 
 <div class="text-center">
     <!--page title-->
-    <h1 class="display-4">Bookstore Database</h1>
+    
 
     
     <!--Each time a book is added, its card is displayed on the page. 5 Books per page-->
@@ -22,7 +22,7 @@
             <div id="pages" page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" 
                  page-class="btn"
                  page-class-normal="btn-outline-dark"
-                 page-class-selected="btn-primary"
+                 page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
                  class="btn-group pull-right m-1"></div>
 
         </div>
