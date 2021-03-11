@@ -2,7 +2,7 @@
 
 namespace Bookstore.Migrations
 {
-    public partial class new2 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace Bookstore.Migrations
                 columns: table => new
                 {
                     BookID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     BookTitle = table.Column<string>(nullable: false),
                     BookAuthor = table.Column<string>(nullable: false),
                     BookPublisher = table.Column<string>(nullable: false),

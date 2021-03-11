@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,10 +30,19 @@ namespace Bookstore
 
             services.AddDbContext<BookstoreDbContext>(options =>
            {
-               options.UseSqlServer(Configuration["ConnectionStrings:BookstoreConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:BookstoreConnection"]);
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession();
+
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +60,8 @@ namespace Bookstore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
@@ -77,6 +89,8 @@ namespace Bookstore
                     "/P{page}",
                     new { Controller = "Home", action = "Index" });
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+
             });
 
             SeedData.EnsurePopulated(app);
